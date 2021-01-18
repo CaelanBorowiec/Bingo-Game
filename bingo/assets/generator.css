@@ -37,6 +37,15 @@ body {
   font-weight: bold;
 }
 
+.square:hover {
+  background: #00800052;
+}
+
+.square.ticked {
+  background: green;
+  color: white;
+}
+
 .question.star {
   font-size: 100px;
 }

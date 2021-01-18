@@ -60,6 +60,9 @@ $(document).ready(function() {
   }
 
   $('.generator').html(questionBlocks);
+  $('.square').on('click', function() {
+    $(this).toggleClass('ticked')
+  })
 });
 
 /* Randomize array in-place using Durstenfeld shuffle algorithm */
