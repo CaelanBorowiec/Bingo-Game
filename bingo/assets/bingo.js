@@ -81,6 +81,7 @@ $(document).ready(function() {
   }
 
   const SaveBingoSheet = function() {
+
     let completed = $('.square').map(function() {
       return $(this).hasClass('ticked');
     }).get();
@@ -98,6 +99,18 @@ $(document).ready(function() {
     Cookies.set('completed', JSON.stringify(completed));
   }
 
+  // Save hook
+  $('#save').on('click', function() {
+    SaveBingoSheet();
+  });
+
+  // Reset hook
+  $('#reset').on('click', function() {
+    Cookies.remove('autosave');
+    Cookies.remove('questions');
+    Cookies.remove('completed');
+  });
+
   $('.collapse-right, .collapse-top').on('click', function() {
     $(this).parent().toggleClass('collapsed');
     if ($(this).parent().hasClass('collapsed'))
@@ -106,15 +119,6 @@ $(document).ready(function() {
       $(this).html('&raquo;')
   });
 
-  $('#save').on('click', function() {
-    SaveBingoSheet();
-  });
-
-  $('#reset').on('click', function() {
-    Cookies.remove('autosave');
-    Cookies.remove('questions');
-    Cookies.remove('completed');
-  });
 
   $('#generate').on('click', function() {
     const input = $('.inputBox textarea').val().split(/\r?\n/);
