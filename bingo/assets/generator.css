@@ -115,3 +115,34 @@ body {
   color: white;
   font-weight: bold;
 }
+
+.saveBox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: white;
+  border-radius: 0 0 10px 10px;
+  padding: 10px;
+  transition: .5s;
+  width: 400px;
+  border: 1px solid black;
+  border-right: none;
+}
+
+.saveBox.collapsed {
+  top: -90px;
+}
+
+.saveBox .collapse-top {
+  position: absolute;
+  cursor: pointer;
+  right: 50%;
+  background: white;
+  bottom: -23px;
+  border-radius: 3px 0 0 3px;
+  padding: 4px 3px 6px;
+  content: '>';
+  border: 1px solid black;
+  border-right: none;
+  transform: rotate(-90deg);
+}
