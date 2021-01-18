@@ -1,6 +1,8 @@
 body {
   background-image: url('img/y-so-serious.png');
   font-family: sans-serif;
+  position: relative;
+  margin: 0;
 }
 
 .bingo-wrapper {
@@ -48,4 +50,14 @@ body {
 
 .question.star {
   font-size: 100px;
+}
+
+.inputBox {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background: white;
+  border-radius: 10px 0 0 10px;
+  padding: 10px;
+  transition: .5s;
 }
