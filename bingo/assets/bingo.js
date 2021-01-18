@@ -1,7 +1,8 @@
 $(document).ready(function() {
   const Squares = (5 * 5);
-  const FreeSpace = true;
-  const Questions = ["Ut",
+  const FreeSpace = false;
+  const Questions = [
+    "Ut",
     "elementum",
     "sit",
     "amet",
@@ -15,6 +16,7 @@ $(document).ready(function() {
     "elit",
     "non",
     "erat",
+    "erata",
     "commodo",
     "aliquet",
     "et",
