@@ -39,11 +39,14 @@ $(document).ready(function() {
     }
 
     questionBlocks[i] = $('<div>').addClass('square');
+    $span = $('<span>').addClass('question');
 
     if (x == star && y == star)
-      questionBlocks[i].text("&#9733;");
+      $span.text("&#9733;");
     else
-      questionBlocks[i].text(Questions[i]);
+      $span.text(Questions[i]);
+
+    questionBlocks[i].html($span);
 
     x++;
   }
