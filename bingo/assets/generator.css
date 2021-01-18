@@ -88,7 +88,7 @@ body {
   height: 10em;
 }
 
-.inputBox .collapse {
+.inputBox .collapse-right {
   position: absolute;
   cursor: pointer;
   left: -15px;
@@ -102,7 +102,7 @@ body {
   border-right: none;
 }
 
-.inputBox.collapsed .collapse {
+.inputBox.collapsed .collapse-right {
   content: '<';
 }
 

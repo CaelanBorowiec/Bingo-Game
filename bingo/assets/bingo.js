@@ -69,7 +69,7 @@ $(document).ready(function() {
     });
   }
 
-  $('.collapse').on('click', function() {
+  $('.collapse-right').on('click', function() {
     $('.inputBox').toggleClass('collapsed');
     if ($('.inputBox').hasClass('collapsed'))
       $(this).html('&laquo;')
