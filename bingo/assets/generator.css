@@ -3,7 +3,7 @@ body {
   font-family: sans-serif;
   position: relative;
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .bingo-wrapper {
