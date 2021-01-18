@@ -1,5 +1,6 @@
 $(document).ready(function() {
-  // TODO: add ability to save sheet / progress
+  const Autosave = (Cookies.get('autosave') ? true : false);
+
   const DrawBingoSheet = function(Questions = false) {
     const Squares = (5 * 5);
     const FreeSpace = true;
@@ -35,7 +36,11 @@ $(document).ready(function() {
 
     const cellsPerRow = Math.sqrt(Squares);
     const star = Math.ceil((cellsPerRow / 2));
-    const shuffledQuestions = shuffleArray(Questions);
+    let shuffledQuestions;
+    if (Autosave && Cookies.get('autosave') ? true : false)
+      shuffledQuestions = Cookies.get('questions');
+    else
+      shuffledQuestions = shuffleArray(Questions);
 
     let x = 1;
     let y = 1;
@@ -67,6 +72,19 @@ $(document).ready(function() {
     $('.square').on('click', function() {
       $(this).toggleClass('ticked');
     });
+  }
+
+  const SaveBingoSheet = function() {
+    let completed = $('.square').map(function() {
+      return $(this).hasClass('ticked');
+    }).get();
+
+    let shuffledQuestions = $('.square').map(function() {
+      return $(this).text();
+    }).get();
+
+    Cookies.set('questions', JSON.stringify(shuffledQuestions));
+    Cookies.set('completed', JSON.stringify(completed));
   }
 
   $('.collapse-right, .collapse-top').on('click', function() {
