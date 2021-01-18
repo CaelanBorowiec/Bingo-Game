@@ -37,10 +37,14 @@ $(document).ready(function() {
     const cellsPerRow = Math.sqrt(Squares);
     const star = Math.ceil((cellsPerRow / 2));
     let shuffledQuestions;
-    if (Autosave && Cookies.get('autosave') ? true : false)
-      shuffledQuestions = Cookies.get('questions');
+    if (Autosave && Cookies.get('questions') ? true : false)
+      shuffledQuestions = JSON.parse(Cookies.get('questions'));
     else
       shuffledQuestions = shuffleArray(Questions);
+
+    let completed = [];
+    if (Autosave)
+      completed = JSON.parse(Cookies.get('completed'));
 
     let x = 1;
     let y = 1;
@@ -62,6 +66,8 @@ $(document).ready(function() {
         $span.text(shuffledQuestions[q].trim());
         q++
       }
+      if (typeof completed[i] !== 'undefined' && completed[i] === true)
+        questionBlocks[i].addClass('ticked');
 
       questionBlocks[i].html($span);
 
@@ -82,7 +88,12 @@ $(document).ready(function() {
     let shuffledQuestions = $('.square').map(function() {
       return $(this).text();
     }).get();
+    const star = shuffledQuestions.indexOf("★");
+    if (star > -1) {
+      shuffledQuestions.splice(star, 1); // Remove star
+    }
 
+    Cookies.set('autosave', true);
     Cookies.set('questions', JSON.stringify(shuffledQuestions));
     Cookies.set('completed', JSON.stringify(completed));
   }
@@ -95,10 +106,19 @@ $(document).ready(function() {
       $(this).html('&raquo;')
   });
 
+  $('#save').on('click', function() {
+    SaveBingoSheet();
+  });
+
+  $('#reset').on('click', function() {
+    Cookies.remove('autosave');
+    Cookies.remove('questions');
+    Cookies.remove('completed');
+  });
+
   $('#generate').on('click', function() {
     const input = $('.inputBox textarea').val().split(/\r?\n/);
     DrawBingoSheet(input);
-    debugger
   });
 
   DrawBingoSheet();
