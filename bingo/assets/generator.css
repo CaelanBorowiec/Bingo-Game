@@ -1,12 +1,23 @@
 body {
   background-image: url('img/y-so-serious.png');
+  font-family: sans-serif;
+}
+
+.bingo-wrapper {
+  background: white;
+  margin: 50px auto;
+  width: 800px;
+  padding: 50px;
+}
+
+.title h1 {
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .generator {
-  width: 625px;
   height: 800px;
-  background: white;
-  margin: 50px auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
