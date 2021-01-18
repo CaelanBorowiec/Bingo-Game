@@ -1,0 +1,10 @@
+body {
+  background-image: url('img/y-so-serious.png');
+}
+
+.generator {
+  width: 625px;
+  height: 800px;
+  background: white;
+  margin: 50px auto;
+}
