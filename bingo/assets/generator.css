@@ -66,6 +66,8 @@ body {
   padding: 10px;
   transition: .5s;
   width: 400px;
+  border: 1px solid black;
+  border-right: none;
 }
 
 .inputBox.collapsed {
@@ -91,11 +93,13 @@ body {
   cursor: pointer;
   left: -15px;
   background: white;
-  width: 15px;
+  width: 8px;
   top: 50%;
   border-radius: 3px 0 0 3px;
   padding: 3px;
   content: '>';
+  border: 1px solid black;
+  border-right: none;
 }
 
 .inputBox.collapsed .collapse {
