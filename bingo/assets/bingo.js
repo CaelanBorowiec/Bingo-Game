@@ -1,35 +1,36 @@
 $(document).ready(function() {
-
+  // TODO: add ability to save sheet / progress
   const DrawBingoSheet = function(Questions = false) {
     const Squares = (5 * 5);
     const FreeSpace = true;
     if (!Questions || Questions == '')
+      // OCR from https://www.reddit.com/r/ProgrammerHumor/comments/c4jlyt/programming_bingo/
       Questions = [
-        "Ut",
-        "elementum",
-        "sit",
-        "amet",
-        "ante",
-        "sit",
-        "amet",
-        "facilisis.",
-        "Nulla",
-        "sit",
-        "amet",
-        "elit",
-        "non",
-        "erat",
-        "erata",
-        "commodo",
-        "aliquet",
-        "et",
-        "eu",
-        "diam.",
-        "Ut",
-        "sollicitudin",
-        "urna",
-        "ex.",
-        "Duis."
+        "Changing something causes an error in an entirely different Part of the program ",
+        "Bug that vanishes when attempting to debug it ",
+        "Code has been updated, comments haven't",
+        "TODO tasks grow faster than done tasks",
+        "Swearing in comments",
+        "Question closed on stack overflow",
+        "OutOfMemory Exception [or equivalent]",
+        "Project with at least 3 different conflicting naming schemes",
+        "Spend all night trying to trace a bug",
+        "Take more than twice the original time estimate to complete a task",
+        "Procrastinate on Reddit",
+        "Find major bug in prod that has somehow stayed undetected for years",
+        "Bad Documentation",
+        "https://xkcd.com/979/ ",
+        "Stack trace too long to fit on your screen",
+        "Push untested code to prod",
+        "NULL Pointer Execution [or equivalent]",
+        "Spend several hours fixing a small visual bug",
+        "IDE Crashes",
+        "Third party library refuses to build",
+        "Copy paste code you don't understand",
+        "Windows vs Lions debate",
+        "Close 10+ tabs alter fixing an issue",
+        "Project depends on multiple versions of the same library",
+        "Endless debate about what language/library to use"
       ];
 
     const cellsPerRow = Math.sqrt(Squares);
@@ -53,7 +54,7 @@ $(document).ready(function() {
       if (FreeSpace && x == star && y == star)
         $span.html("&#9733;").addClass('star');
       else {
-        $span.text(shuffledQuestions[q]);
+        $span.text(shuffledQuestions[q]).trim();
         q++
       }
 
@@ -78,7 +79,7 @@ $(document).ready(function() {
 
   $('#generate').on('click', function() {
     const input = $('.inputBox textarea').val().split(/\r?\n/);
-    DrawBingoSheet(input); // TODO: add input from textarea
+    DrawBingoSheet(input);
     debugger
   });
 
