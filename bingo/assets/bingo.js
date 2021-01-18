@@ -6,8 +6,8 @@ $(document).ready(function() {
     if (!Questions || Questions == '')
       // OCR from https://www.reddit.com/r/ProgrammerHumor/comments/c4jlyt/programming_bingo/
       Questions = [
-        "Changing something causes an error in an entirely different Part of the program ",
-        "Bug that vanishes when attempting to debug it ",
+        "Changing something causes an error in an entirely different part of the program",
+        "Bug that vanishes when attempting to debug it",
         "Code has been updated, comments haven't",
         "TODO tasks grow faster than done tasks",
         "Swearing in comments",
@@ -18,17 +18,17 @@ $(document).ready(function() {
         "Take more than twice the original time estimate to complete a task",
         "Procrastinate on Reddit",
         "Find major bug in prod that has somehow stayed undetected for years",
-        "Bad Documentation",
-        "https://xkcd.com/979/ ",
+        "Bad documentation",
+        "https://xkcd.com/979/",
         "Stack trace too long to fit on your screen",
         "Push untested code to prod",
-        "NULL Pointer Execution [or equivalent]",
+        "NULL Pointer Exception [or equivalent]",
         "Spend several hours fixing a small visual bug",
         "IDE Crashes",
         "Third party library refuses to build",
         "Copy paste code you don't understand",
-        "Windows vs Lions debate",
-        "Close 10+ tabs alter fixing an issue",
+        "Windows vs macOS debate",
+        "Close 10+ tabs after fixing an issue",
         "Project depends on multiple versions of the same library",
         "Endless debate about what language/library to use"
       ];
