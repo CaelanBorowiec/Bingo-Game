@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  const Autosave = (Cookies.get('autosave') ? true : false);
+  const AutosaveEnabled = (Cookies.get('autosave') ? true : false);
   const SavedQuestions = Cookies.get('questions');
 
   const DrawBingoSheet = function(Questions = false) {
@@ -42,13 +42,13 @@ $(document).ready(function() {
     const cellsPerRow = Math.sqrt(Squares);
     const star = Math.ceil((cellsPerRow / 2));
     let shuffledQuestions;
-    if (Autosave && !newQuestions && (SavedQuestions ? true : false)) // TODO: make sure new questions are permitted
+    if (AutosaveEnabled && !newQuestions && (SavedQuestions ? true : false)) // TODO: make sure new questions are permitted
       shuffledQuestions = JSON.parse(SavedQuestions);
     else
       shuffledQuestions = shuffleArray(Questions);
 
     let completed = [];
-    if (Autosave)
+    if (AutosaveEnabled)
       completed = JSON.parse(Cookies.get('completed'));
 
     let x = 1;
@@ -105,6 +105,7 @@ $(document).ready(function() {
 
   // Reset hook
   $('#reset').on('click', function() {
+    $('#save').removeClass('autosaving').text("Autosave");
     Cookies.remove('autosave');
     Cookies.remove('questions');
     Cookies.remove('completed');
@@ -133,13 +134,17 @@ $(document).ready(function() {
       $(this).html('&raquo;')
   });
 
-
+  // Generate new bingo sheet
   $('#generate').on('click', function() {
     const input = $('.inputBox textarea').val().split(/\r?\n/);
     DrawBingoSheet(input);
   });
 
   DrawBingoSheet();
+
+  if (AutosaveEnabled) {
+    $('#save').click()
+  }
 });
 
 /* Randomize array in-place using Durstenfeld shuffle algorithm */
