@@ -1,6 +1,6 @@
 $(document).ready(function() {
   const Squares = (5 * 5);
-  const FreeSpace = false;
+  const FreeSpace = true;
   const Questions = [
     "Ut",
     "elementum",
