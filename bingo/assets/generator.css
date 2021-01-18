@@ -38,6 +38,9 @@ body {
 
 .square>.question {
   font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  word-break: break-word;
 }
 
 .square:hover {
