@@ -54,7 +54,7 @@ $(document).ready(function() {
       if (FreeSpace && x == star && y == star)
         $span.html("&#9733;").addClass('star');
       else {
-        $span.text(shuffledQuestions[q]).trim();
+        $span.text(shuffledQuestions[q].trim());
         q++
       }
 
