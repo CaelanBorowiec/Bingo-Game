@@ -81,7 +81,6 @@ $(document).ready(function() {
   }
 
   const SaveBingoSheet = function() {
-
     let completed = $('.square').map(function() {
       return $(this).hasClass('ticked');
     }).get();
@@ -102,6 +101,15 @@ $(document).ready(function() {
   // Save hook
   $('#save').on('click', function() {
     SaveBingoSheet();
+    $(this).addClass('autosaving').text("Autosave Enabled");
+
+    let autoSave = setInterval(function() {
+      if ((Cookies.get('autosave') ? true : false)) {
+        SaveBingoSheet();
+      } else {
+        clearInterval(autoSave);
+      }
+    }, 5000);
   });
 
   // Reset hook

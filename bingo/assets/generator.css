@@ -120,6 +120,10 @@ button#reset {
   background: red;
 }
 
+button#save.autosaving {
+  background: green;
+}
+
 .inputBox button {
   float: right;
 }
