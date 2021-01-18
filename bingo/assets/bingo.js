@@ -61,8 +61,17 @@ $(document).ready(function() {
 
   $('.generator').html(questionBlocks);
   $('.square').on('click', function() {
-    $(this).toggleClass('ticked')
+    $(this).toggleClass('ticked');
   })
+  $('.collapse').on('click', function() {
+
+    $('.inputBox').toggleClass('collapsed');
+    if ($('.inputBox').hasClass('collapsed'))
+      $(this).html('&laquo;')
+    else
+      $(this).html('&raquo;')
+  })
+
 });
 
 /* Randomize array in-place using Durstenfeld shuffle algorithm */
