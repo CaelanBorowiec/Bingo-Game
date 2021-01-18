@@ -36,3 +36,7 @@ body {
 .square>.question {
   font-weight: bold;
 }
+
+.question.star {
+  font-size: 100px;
+}
