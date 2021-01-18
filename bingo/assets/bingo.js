@@ -31,8 +31,9 @@ $(document).ready(function() {
   const star = Math.ceil((cellsPerRow / 2));
   let x = 1;
   let y = 1;
+  let q = 0;
   let questionBlocks = [];
-  for (var i = 0; i <= Squares - (FreeSpace ? 1 : 0); i++) {
+  for (var i = 0; i < Squares; i++) {
     if (x > 5) {
       x = 1;
       y++;
@@ -41,10 +42,12 @@ $(document).ready(function() {
     questionBlocks[i] = $('<div>').addClass('square');
     $span = $('<span>').addClass('question');
 
-    if (x == star && y == star)
+    if (FreeSpace && x == star && y == star)
       $span.text("&#9733;");
-    else
-      $span.text(Questions[i]);
+    else {
+      $span.text(Questions[q]);
+      q++
+    }
 
     questionBlocks[i].html($span);
 
