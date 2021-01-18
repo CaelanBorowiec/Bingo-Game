@@ -3,7 +3,7 @@ $(document).ready(function() {
   const DrawBingoSheet = function(Questions = false) {
     const Squares = (5 * 5);
     const FreeSpace = true;
-    if (!Questions)
+    if (!Questions || Questions == '')
       Questions = [
         "Ut",
         "elementum",
@@ -77,7 +77,9 @@ $(document).ready(function() {
   });
 
   $('#generate').on('click', function() {
-    DrawBingoSheet(); // TODO: add input from textarea
+    const input = $('.inputBox textarea').val().split(/\r?\n/);
+    DrawBingoSheet(input); // TODO: add input from textarea
+    debugger
   });
 
   DrawBingoSheet();
