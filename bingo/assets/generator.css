@@ -98,3 +98,13 @@ body {
 .inputBox.collapsed .collapse {
   content: '<';
 }
+
+.inputBox button {
+  float: right;
+  background: #007bff;
+  border: unset;
+  border-radius: 5px;
+  padding: 5px 30px;
+  color: white;
+  font-weight: bold;
+}
