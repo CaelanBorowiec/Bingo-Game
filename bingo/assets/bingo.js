@@ -1,10 +1,14 @@
 $(document).ready(function() {
   const Autosave = (Cookies.get('autosave') ? true : false);
+  const SavedQuestions = Cookies.get('questions');
 
   const DrawBingoSheet = function(Questions = false) {
     const Squares = (5 * 5);
     const FreeSpace = true;
-    if (!Questions || Questions == '')
+
+    let newQuestions = true;
+    if (!Questions || Questions[0] == '') {
+      newQuestions = false;
       // OCR from https://www.reddit.com/r/ProgrammerHumor/comments/c4jlyt/programming_bingo/
       Questions = [
         "Changing something causes an error in an entirely different part of the program",
@@ -33,12 +37,13 @@ $(document).ready(function() {
         "Project depends on multiple versions of the same library",
         "Endless debate about what language/library to use"
       ];
+    }
 
     const cellsPerRow = Math.sqrt(Squares);
     const star = Math.ceil((cellsPerRow / 2));
     let shuffledQuestions;
-    if (Autosave && Cookies.get('questions') ? true : false)
-      shuffledQuestions = JSON.parse(Cookies.get('questions'));
+    if (Autosave && !newQuestions && (SavedQuestions ? true : false)) // TODO: make sure new questions are permitted
+      shuffledQuestions = JSON.parse(SavedQuestions);
     else
       shuffledQuestions = shuffleArray(Questions);
 
@@ -98,6 +103,13 @@ $(document).ready(function() {
     Cookies.set('completed', JSON.stringify(completed));
   }
 
+  // Reset hook
+  $('#reset').on('click', function() {
+    Cookies.remove('autosave');
+    Cookies.remove('questions');
+    Cookies.remove('completed');
+  });
+
   // Save hook
   $('#save').on('click', function() {
     SaveBingoSheet();
@@ -112,13 +124,7 @@ $(document).ready(function() {
     }, 5000);
   });
 
-  // Reset hook
-  $('#reset').on('click', function() {
-    Cookies.remove('autosave');
-    Cookies.remove('questions');
-    Cookies.remove('completed');
-  });
-
+  // collapsing menus
   $('.collapse-right, .collapse-top').on('click', function() {
     $(this).parent().toggleClass('collapsed');
     if ($(this).parent().hasClass('collapsed'))
