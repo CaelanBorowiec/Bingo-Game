@@ -106,14 +106,22 @@ body {
   content: '<';
 }
 
-.inputBox button {
-  float: right;
+button {
   background: #007bff;
   border: unset;
   border-radius: 5px;
   padding: 5px 30px;
   color: white;
   font-weight: bold;
+  cursor: pointer;
+}
+
+button#reset {
+  background: red;
+}
+
+.inputBox button {
+  float: right;
 }
 
 .saveBox {
@@ -124,13 +132,13 @@ body {
   border-radius: 0 0 10px 10px;
   padding: 10px;
   transition: .5s;
-  width: 400px;
+  width: 300px;
   border: 1px solid black;
   border-right: none;
 }
 
 .saveBox.collapsed {
-  top: -90px;
+  top: -45px;
 }
 
 .saveBox .collapse-top {
@@ -145,4 +153,9 @@ body {
   border: 1px solid black;
   border-right: none;
   transform: rotate(-90deg);
+}
+
+.save-controls {
+  display: flex;
+  justify-content: space-evenly;
 }
