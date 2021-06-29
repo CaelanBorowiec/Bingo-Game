@@ -1,9 +1,14 @@
 $(document).ready(function() {
-  // TODO: add ability to save sheet / progress
+  const AutosaveEnabled = (Cookies.get('autosave') ? true : false);
+  const SavedQuestions = Cookies.get('questions');
+
   const DrawBingoSheet = function(Questions = false) {
     const Squares = (5 * 5);
     const FreeSpace = true;
-    if (!Questions || Questions == '')
+
+    let newQuestions = true;
+    if (!Questions || Questions[0] == '') {
+      newQuestions = false;
       // OCR from https://www.reddit.com/r/ProgrammerHumor/comments/c4jlyt/programming_bingo/
       Questions = [
         "Changing something causes an error in an entirely different part of the program",
@@ -32,10 +37,19 @@ $(document).ready(function() {
         "Project depends on multiple versions of the same library",
         "Endless debate about what language/library to use"
       ];
+    }
 
     const cellsPerRow = Math.sqrt(Squares);
     const star = Math.ceil((cellsPerRow / 2));
-    const shuffledQuestions = shuffleArray(Questions);
+    let shuffledQuestions;
+    if (AutosaveEnabled && !newQuestions && (SavedQuestions ? true : false)) // TODO: make sure new questions are permitted
+      shuffledQuestions = JSON.parse(SavedQuestions);
+    else
+      shuffledQuestions = shuffleArray(Questions);
+
+    let completed = [];
+    if (AutosaveEnabled)
+      completed = JSON.parse(Cookies.get('completed'));
 
     let x = 1;
     let y = 1;
@@ -57,6 +71,8 @@ $(document).ready(function() {
         $span.text(shuffledQuestions[q].trim());
         q++
       }
+      if (typeof completed[i] !== 'undefined' && completed[i] === true)
+        questionBlocks[i].addClass('ticked');
 
       questionBlocks[i].html($span);
 
@@ -69,6 +85,47 @@ $(document).ready(function() {
     });
   }
 
+  const SaveBingoSheet = function() {
+    let completed = $('.square').map(function() {
+      return $(this).hasClass('ticked');
+    }).get();
+
+    let shuffledQuestions = $('.square').map(function() {
+      return $(this).text();
+    }).get();
+    const star = shuffledQuestions.indexOf("★");
+    if (star > -1) {
+      shuffledQuestions.splice(star, 1); // Remove star
+    }
+
+    Cookies.set('autosave', true);
+    Cookies.set('questions', JSON.stringify(shuffledQuestions));
+    Cookies.set('completed', JSON.stringify(completed));
+  }
+
+  // Reset hook
+  $('#reset').on('click', function() {
+    $('#save').removeClass('autosaving').text("Autosave");
+    Cookies.remove('autosave');
+    Cookies.remove('questions');
+    Cookies.remove('completed');
+  });
+
+  // Save hook
+  $('#save').on('click', function() {
+    SaveBingoSheet();
+    $(this).addClass('autosaving').text("Autosave Enabled");
+
+    let autoSave = setInterval(function() {
+      if ((Cookies.get('autosave') ? true : false)) {
+        SaveBingoSheet();
+      } else {
+        clearInterval(autoSave);
+      }
+    }, 5000);
+  });
+
+  // collapsing menus
   $('.collapse-right, .collapse-top').on('click', function() {
     $(this).parent().toggleClass('collapsed');
     if ($(this).parent().hasClass('collapsed'))
@@ -77,13 +134,17 @@ $(document).ready(function() {
       $(this).html('&raquo;')
   });
 
+  // Generate new bingo sheet
   $('#generate').on('click', function() {
     const input = $('.inputBox textarea').val().split(/\r?\n/);
     DrawBingoSheet(input);
-    debugger
   });
 
   DrawBingoSheet();
+
+  if (AutosaveEnabled) {
+    $('#save').click()
+  }
 });
 
 /* Randomize array in-place using Durstenfeld shuffle algorithm */

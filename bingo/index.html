@@ -4,6 +4,7 @@
 <head>
   <link rel="stylesheet" href="assets/generator.css">
   <script src="assets/jquery-3.5.1.min.js" charset="utf-8"></script>
+  <script src="assets/js.cookie.min.js" charset="utf-8"></script>
   <!-- <script src="assets/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous" charset="utf-8"></script> -->
   <script src="assets/bingo.js" charset="utf-8"></script>
   <title>Bingo Generator</title>
@@ -13,7 +14,7 @@
 
   <div class="bingo-wrapper">
     <div class="title">
-      <h1>Bingo</h1>
+      <h1>Web Bingo Sheet</h1>
     </div>
     <div class="generator">
       <div class='filler'>Loading...</div>
@@ -24,7 +25,10 @@
     <div class='collapse-top'>
       &raquo;
     </div>
-    <h2>Save:</h2>
+    <div class="save-controls">
+      <button type="button" id="save">Autosave</button>
+      <button type="button" id="reset">Reset</button>
+    </div>
   </div>
 
   <div class="inputBox">
